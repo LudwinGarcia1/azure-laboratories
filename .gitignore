@@ -1,0 +1,25 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+
+# Terraform local state
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfstate.*
+crash.log
+
+# Environment variables
+.env
+*.env
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Video source files (kept in scratch)
+*.mp4

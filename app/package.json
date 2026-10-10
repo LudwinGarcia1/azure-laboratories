@@ -1,0 +1,15 @@
+{
+  "name": "azure-utvt-integradora-web",
+  "version": "1.0.0",
+  "description": "Aplicacion Web desplegada en Azure App Service con Application Insights - UTVT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "applicationinsights": "^2.9.5",
+    "express": "^4.19.2"
+  },
+  "author": "Ludwin Garcia Gaytan (222310777 - IDGS-81)",
+  "license": "MIT"
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTVT - Azure App Service Lab 1</title>
+    <style>
+        :root {
+            --primary: #0078D4;
+            --dark: #1E293B;
+            --accent: #10B981;
+            --bg: #0F172A;
+            --card: #1E293B;
+            --text: #F8FAFC;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            color: #38BDF8;
+        }
+        h2 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #94A3B8;
+            margin: 0 0 30px 0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .card-label {
+            font-size: 12px;
+            color: #64748B;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .card-val {
+            font-size: 15px;
+            font-weight: 600;
+            color: #E2E8F0;
+        }
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 13px;
+            color: #64748B;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge">Azure App Service &middot; Node.js 20 LTS</div>
+        <h1>Universidad Tecnol&oacute;gica del Valle de Toluca</h1>
+        <h2>Evaluaci&oacute;n y Mejora para el Desarrollo de Software &middot; Pr&aacute;ctica 12</h2>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-label">Alumno</div>
+                <div class="card-val">Ludwin Garc&iacute;a Gayt&aacute;n</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Matr&iacute;cula</div>
+                <div class="card-val">222310777</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Grupo</div>
+                <div class="card-val">IDGS-81</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Estado</div>
+                <div class="card-val"><span class="status-dot"></span>Desplegado en Producci&oacute;n / Dev</div>
+            </div>
+            <div class="card">
+                <div class="card-label">App Service Plan</div>
+                <div class="card-val">asp-utvt-integradora-dev-mxc-001 (F1)</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Application Insights</div>
+                <div class="card-val">appi-utvt-integradora-dev-mxc-001</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>Docente: Mtro. Jorge Almeida Montiel</span>
+            <span>Regi&oacute;n: Mexico Central (mxc)</span>
+        </div>
+    </div>
+</body>
+</html>

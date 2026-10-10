@@ -89,24 +89,17 @@ azure-laboratories/
 │   └── index.html                      # Interfaz visual con metadatos del estudiante
 └── docs/
     ├── Reporte_Practica12_Azure_App_Service.docx  # Reporte formal de evidencias UTVT
-    └── evidencias/                                # Capturas del Portal y terminales
+    └── evidencias/                                # Capturas del Portal institucional y consola
         ├── 01_excel_matriz_componentes.png
-        ├── 02_portal_crear_resource_group.png
-        ├── 03_portal_resource_group_overview.png
-        ├── 04_portal_crear_log_analytics.png
-        ├── 05_portal_log_analytics_overview.png
-        ├── 06_portal_crear_app_insights.png
-        ├── 07_portal_app_insights_overview.png
-        ├── 08_portal_crear_app_service_plan.png
-        ├── 09_portal_app_service_plan_sku.png
-        ├── 10_portal_app_service_plan_overview.png
-        ├── 11_portal_crear_web_app.png
-        ├── 12_portal_web_app_overview.png
-        ├── 13_portal_vincular_app_insights.png
-        ├── 14_portal_app_insights_vinculado_overview.png
-        ├── term_01_az_group_workspace.png
-        ├── term_02_az_insights_plan.png
-        └── term_03_az_webapp_insights.png
+        ├── portal_01_resource_group_overview.png
+        ├── portal_02_log_analytics_overview.png
+        ├── portal_03_app_insights_overview.png
+        ├── portal_04_app_service_plan_overview.png
+        ├── portal_05_web_app_overview.png
+        ├── portal_06_group_insights_monitoring.png
+        ├── term_01_az_group_and_account.png
+        ├── term_02_az_resources_table.png
+        └── term_03_az_webapp_details.png
 ```
 
 ---

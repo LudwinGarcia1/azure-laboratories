@@ -1,0 +1,152 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "project": "Restaurant Hub (RestoHub) / Callejón 9",
+    "course": "Arquitectura del Proyecto Integrador",
+    "institution": "Universidad Tecnológica del Valle de Toluca",
+    "author": "Ludwin García Gaytán (222310777)",
+    "group": "IDGS 101"
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "mexicocentral",
+      "metadata": {
+        "description": "Región de Azure para los recursos."
+      }
+    },
+    "vnetName": {
+      "type": "string",
+      "defaultValue": "vnet-utvt-integradora-dev-mxc-001"
+    },
+    "vmName": {
+      "type": "string",
+      "defaultValue": "vm-utvt-integradora-dev-mxc-001"
+    },
+    "postgresServerName": {
+      "type": "string",
+      "defaultValue": "psql-utvt-integradora-dev-mxc-001"
+    },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "stutvtintdevmxc001"
+    },
+    "appServicePlanName": {
+      "type": "string",
+      "defaultValue": "asp-utvt-integradora-dev-mxc-001"
+    },
+    "webAppName": {
+      "type": "string",
+      "defaultValue": "app-utvt-integradora-web-dev-mxc-001"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2023-09-01",
+      "name": "[parameters('vnetName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "snet-utvt-integradora-app-dev-mxc-001",
+            "properties": {
+              "addressPrefix": "10.0.1.0/24",
+              "delegations": [
+                {
+                  "name": "delegation-appservice",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "snet-utvt-integradora-db-dev-mxc-001",
+            "properties": {
+              "addressPrefix": "10.0.2.0/24"
+            }
+          },
+          {
+            "name": "snet-utvt-integradora-vm-dev-mxc-001",
+            "properties": {
+              "addressPrefix": "10.0.3.0/24"
+            }
+          },
+          {
+            "name": "snet-utvt-integradora-pe-dev-mxc-001",
+            "properties": {
+              "addressPrefix": "10.0.4.0/24",
+              "privateEndpointNetworkPolicies": "Disabled"
+            }
+          },
+          {
+            "name": "AzureBastionSubnet",
+            "properties": {
+              "addressPrefix": "10.0.5.0/24"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2023-01-01",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "minimumTlsVersion": "TLS1_2",
+        "publicNetworkAccess": "Disabled"
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2023-01-01",
+      "name": "[parameters('appServicePlanName')]",
+      "location": "[parameters('location')]",
+      "kind": "linux",
+      "sku": {
+        "name": "B1",
+        "tier": "Basic"
+      },
+      "properties": {
+        "reserved": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2023-01-01",
+      "name": "[parameters('webAppName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+      ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+        "virtualNetworkSubnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), 'snet-utvt-integradora-app-dev-mxc-001')]",
+        "siteConfig": {
+          "linuxFxVersion": "NODE|20-lts",
+          "alwaysOn": true
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "vnetId": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+    }
+  }
+}

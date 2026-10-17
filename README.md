@@ -1,139 +1,137 @@
-# Laboratorios de Azure — App Service & Observabilidad
+# Laboratorios de Infraestructura en la Nube — Microsoft Azure
 
-[![Azure](https://img.shields.io/badge/Microsoft_Azure-App_Service-0078D4?logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
+[![Azure](https://img.shields.io/badge/Microsoft_Azure-Landing_Zone-0078D4?logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
 [![Node.js](https://img.shields.io/badge/Runtime-Node.js_20_LTS-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL_16-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Terraform](https://img.shields.io/badge/IaC-Terraform_1.16-844FBA?logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![UTVT](https://img.shields.io/badge/Institución-UTVT-green)](https://utvt.edomex.gob.mx/)
 [![Author](https://img.shields.io/badge/Autor-Ludwin%20García%20Gaytán-5C4EE5)](https://github.com/LudwinGarcia1)
 
-Repositorio oficial de prácticas de **Computación en la Nube y Plataforma como Servicio (PaaS)** utilizando **Microsoft Azure App Service**, **Log Analytics** y **Application Insights**, correspondiente a la asignatura **Evaluación y Mejora para el Desarrollo de Software** en la **Universidad Tecnológica del Valle de Toluca (UTVT)**.
+Repositorio oficial de prácticas y proyectos de **Computación en la Nube, Plataforma como Servicio (PaaS) e Infraestructura Segura (IaaS / Landing Zone)** en **Microsoft Azure for Students**, correspondiente a las asignaturas del área de software en la **Universidad Tecnológica del Valle de Toluca (UTVT)**.
 
 ---
 
-## 📌 Datos Institucionales
+## 📌 Datos Institucionales y del Proyecto Integrador
 
 * **Institución:** Universidad Tecnológica del Valle de Toluca (UTVT)
+* **Dirección:** Dirección de Carrera de Tecnologías de la Información y Comunicación
 * **Carrera:** Ingeniería en Desarrollo y Gestión de Software (IDGS)
-* **Grupo:** IDGS-81
-* **Asignatura:** Evaluación y Mejora para el Desarrollo de Software
-* **Docente:** Mtro. Jorge Almeida Montiel
-* **Alumno:** Ludwin García Gaytán
-* **Matrícula:** `222310777`
-* **Correo Institucional:** `al222310777@utvtol.edu.mx`
-* **Práctica:** Asignación 12 — Azure Portal - App Service (Laboratorio 1)
+* **Grupo y Cuatrimestre:** IDGS 101 — 10mo Cuatrimestre
+* **Docente Titular:** Mtro. Jorge Almeida Montiel
+* **Proyecto Integrador:** Restaurant Hub (RestoHub) / Callejón 9
+* **Equipo de Trabajo:**
+  * **García Gaytán Ludwin** (Líder de Proyecto — Matrícula: `222310777`)
+  * **Duarte Villavicencio Octavio** (Matrícula: `222310422`)
+  * **Mercado Serrano Valeria** (Matrícula: `222310838`)
+  * **Hernández Mejía Braulio** (Matrícula: `222310435`)
 
 ---
 
-## 📋 Matriz de Nomenclatura de Recursos (Componentes a crear)
+## 📚 Laboratorios Disponibles
 
-Basado en el estándar oficial del laboratorio (`Componentes a crear.xlsx`):
+### 🔹 [Laboratorio 1: Azure App Service, Log Analytics y Application Insights](Lab%201) (Asignación 12)
+* Aprovisionamiento del grupo de recursos `rg-utvt-integradora-dev-mxc-001`.
+* Monitoreo y telemetría APM con Log Analytics Workspace y Application Insights (Workspace-based).
+* App Service Plan y Web App con runtime Node.js 20 LTS.
+* Entregable: [`docs/Reporte_Practica12_Azure_App_Service.docx`](docs/Reporte_Practica12_Azure_App_Service.docx).
 
-| Tipo de Recurso Azure | Entorno Desarrollo (`dev`) | Entorno Pruebas (`qa`) | Entorno Producción (`prod`) |
+### 🔹 [Laboratorio 2: Arquitectura del Proyecto Integrador (Landing Zone & Private Endpoints)](Lab%202) (Asignación 13)
+* Diseño de Landing Zone alineada al Azure Well-Architected Framework en Azure for Students.
+* Segmentación de red virtual (`vnet-utvt-integradora-dev-mxc-001` - `10.0.0.0/16`) en 5 subredes `/24`.
+* Cómputo Linux (`vm-utvt-integradora-dev-mxc-001` - Ubuntu Server 22.04 LTS en B2ats_v2 / B1s).
+* Azure Database for PostgreSQL Flexible Server (`psql-utvt-integradora-dev-mxc-001`) con base de datos `integradora`.
+* Azure Storage Account (`stutvtintdevmxc001`) para Blob Storage.
+* Seguridad Zero-Trust con Private Endpoints y Zonas DNS Privadas para PostgreSQL y Blob Storage (acceso público deshabilitado).
+* Integración de Red Virtual (VNet Integration) en Azure App Service.
+* Estrategia FinOps de parada y desasignación (Stop / Deallocate) para conservación de créditos de estudiantes.
+* Entregable: [`docs/Reporte_Practica13_Arquitectura_Proyecto_Integrador.docx`](docs/Reporte_Practica13_Arquitectura_Proyecto_Integrador.docx).
+
+---
+
+## 🏗️ Diagrama de Arquitectura del Proyecto Integrador (Lab 2)
+
+![Arquitectura de Referencia Azure Students](Lab%202/arquitectura-azure-students%20integradora.png)
+
+### Matriz de Subredes y Direccionamiento IP (Lab 2)
+
+| Recurso | Nombre Oficial (CAF - dev) | CIDR | Función / Propósito |
 | :--- | :--- | :--- | :--- |
-| **Resource Group** | `rg-utvt-integradora-dev-mxc-001` | `rg-utvt-integradora-qa-mxc-001` | `rg-utvt-integradora-prod-mxc-001` |
-| **App Service Plan** | `asp-utvt-integradora-dev-mxc-001` | `asp-utvt-integradora-qa-mxc-001` | `asp-utvt-integradora-prod-mxc-001` |
-| **Web App** | `app-utvt-integradora-web-dev-mxc-001` | `app-utvt-integradora-web-qa-mxc-001` | `app-utvt-integradora-web-prod-mxc-001` |
-| **Log Analytics Workspace** | `log-utvt-integradora-dev-mxc-001` | `log-utvt-integradora-qa-mxc-001` | `log-utvt-integradora-prod-mxc-001` |
-| **Application Insights** | `appi-utvt-integradora-dev-mxc-001` | `appi-utvt-integradora-qa-mxc-001` | `appi-utvt-integradora-prod-mxc-001` |
-| **Key Vault** *(Opcional)* | `kv-utvt-int-dev-mxc-001` | `kv-utvt-int-qa-mxc-001` | `kv-utvt-int-prod-mxc-001` |
-| **PostgreSQL Flexible** *(Opcional)* | `pgsql-utvt-integradora-dev-mxc-001` | `pgsql-utvt-integradora-qa-mxc-001` | `pgsql-utvt-integradora-prod-mxc-001` |
+| **Red Virtual** | `vnet-utvt-integradora-dev-mxc-001` | `10.0.0.0/16` | Espacio de red privado unificado |
+| **Integración App Service** | `snet-utvt-integradora-app-dev-mxc-001` | `10.0.1.0/24` | Delegada a `Microsoft.Web/serverFarms` |
+| **Base de Datos (Reservada)** | `snet-utvt-integradora-db-dev-mxc-001` | `10.0.2.0/24` | Tráfico aislado de persistencia transaccional |
+| **Máquina Virtual (Worker)** | `snet-utvt-integradora-vm-dev-mxc-001` | `10.0.3.0/24` | Procesamiento asíncrono y tareas batch |
+| **Private Endpoints** | `snet-utvt-integradora-pe-dev-mxc-001` | `10.0.4.0/24` | `PrivateEndpointNetworkPolicies = Disabled` |
+| **Azure Bastion Dedicado** | `AzureBastionSubnet` | `10.0.5.0/24` | Administración segura SSH/RDP sin IP pública |
 
 ---
 
-## 🏗️ Arquitectura de la Solución (Lab 1)
-
-```mermaid
-flowchart TD
-    subgraph Subscription["Suscripción: Azure for Students (utvtol.edu.mx)"]
-        subgraph RG["Resource Group: rg-utvt-integradora-dev-mxc-001"]
-            subgraph Monitoring["Capa de Monitoreo y Observabilidad"]
-                LOG["Log Analytics Workspace\n(log-utvt-integradora-dev-mxc-001)\nSKU: PerGB2018 | Retención: 30 días"]
-                APPI["Application Insights\n(appi-utvt-integradora-dev-mxc-001)\nModo: Workspace-based"]
-            end
-
-            subgraph Compute["Capa de Cómputo PaaS"]
-                ASP["App Service Plan\n(asp-utvt-integradora-dev-mxc-001)\nSO: Windows | Nivel: Free F1"]
-                WEB["Azure Web App\n(app-utvt-integradora-web-dev-mxc-001)\nStack: Node.js 20 LTS"]
-            end
-        end
-    end
-
-    LOG <--> APPI
-    APPI -.->|Cadena de conexión\nInstrumentationKey| WEB
-    ASP -->|Hospedaje y recursos de cómputo| WEB
-    User(("Usuario / Navegador Web")) -->|HTTPS| WEB
-```
-
----
-
-## 🚀 Estructura del Repositorio
+## 📁 Estructura del Repositorio
 
 ```text
 azure-laboratories/
 ├── .gitignore
 ├── README.md
+├── app/
+│   ├── index.html                      # Interfaz visual de prueba de la Web App
+│   ├── package.json                    # Dependencias Node.js
+│   └── server.js                       # Servidor Express instrumentado con Application Insights
+├── docs/
+│   ├── Reporte_Practica12_Azure_App_Service.docx               # Reporte formal Práctica 12
+│   ├── Reporte_Practica13_Arquitectura_Proyecto_Integrador.docx # Reporte formal Práctica 13
+│   ├── evidencias/                     # Capturas institucionales del Laboratorio 1
+│   └── evidencias_lab2/                # Capturas de Portal y Terminal del Laboratorio 2
 ├── Lab 1/
 │   ├── Componentes a crear.xlsx        # Matriz oficial de recursos para dev, qa y prod
-│   ├── deploy-azure-resources.ps1      # Automatización en PowerShell con Azure CLI
-│   ├── deploy-azure-resources.sh       # Automatización en Bash con Azure CLI
+│   ├── deploy-azure-resources.ps1      # Despliegue automatizado en PowerShell
+│   ├── deploy-azure-resources.sh       # Despliegue automatizado en Bash
 │   ├── main.tf                         # Infraestructura como Código (Terraform)
-│   ├── variables.tf                    # Definición de variables de entrada
-│   ├── outputs.tf                      # Salidas de infraestructura
+│   ├── variables.tf / outputs.tf       # Variables y salidas Terraform
 │   ├── terraform.tfvars                # Valores de configuración
 │   ├── arm-template.json               # Plantilla ARM nativa
-│   └── bicep/
-│       └── main.bicep                  # Plantilla Bicep modular
-├── app/
-│   ├── server.js                       # Servidor Express con SDK de Application Insights
-│   ├── package.json                    # Dependencias Node.js
-│   └── index.html                      # Interfaz visual con metadatos del estudiante
-└── docs/
-    ├── Reporte_Practica12_Azure_App_Service.docx  # Reporte formal de evidencias UTVT
-    └── evidencias/                                # Capturas del Portal institucional y consola
-        ├── 01_excel_matriz_componentes.png
-        ├── portal_01_resource_group_overview.png
-        ├── portal_02_log_analytics_overview.png
-        ├── portal_03_app_insights_overview.png
-        ├── portal_04_app_service_plan_overview.png
-        ├── portal_05_web_app_overview.png
-        ├── portal_06_group_insights_monitoring.png
-        ├── term_01_az_group_and_account.png
-        ├── term_02_az_resources_table.png
-        └── term_03_az_webapp_details.png
+│   └── bicep/main.bicep                # Plantilla Azure Bicep
+└── Lab 2/
+    ├── Red y subredes.xlsx              # Matriz oficial de diseño de red y direccionamiento
+    ├── Creacion BD Integradora.txt     # Script oficial Azure CLI para creación de BD
+    ├── arquitectura-azure-students integradora.png  # Diagrama de referencia Landing Zone
+    ├── arquitectura-aws integradora.png             # Diagrama comparativo multicloud AWS
+    ├── deploy-azure-resources.ps1      # Despliegue integral automatizado en PowerShell
+    ├── deploy-azure-resources.sh       # Despliegue integral automatizado en Bash
+    ├── manage-cost-optimization.ps1    # Script FinOps para parada/desasignación de cómputo
+    ├── main.tf                         # Infraestructura completa en Terraform
+    ├── variables.tf / outputs.tf       # Variables y salidas Terraform
+    ├── terraform.tfvars                # Valores de variables para desarrollo
+    ├── arm-template.json               # Plantilla ARM para el despliegue del Lab 2
+    ├── bicep/main.bicep                # Plantilla declarativa en Azure Bicep
+    └── README.md                       # Documentación técnica paso a paso del Lab 2
 ```
 
 ---
 
-## ⚙️ Métodos de Despliegue
+## 🚀 Despliegue Automatizado y Rutinas FinOps
 
-### Opción A: Despliegue en Azure Portal (Paso a Paso)
-
-1. **Grupo de Recursos:** Crear `rg-utvt-integradora-dev-mxc-001` en la región `Mexico Central`.
-2. **Log Analytics:** Crear `log-utvt-integradora-dev-mxc-001` asignado al grupo anterior.
-3. **Application Insights:** Crear `appi-utvt-integradora-dev-mxc-001` en modo basado en áreas de trabajo (*Workspace-based*), seleccionando el Log Analytics creado.
-4. **App Service Plan:** Crear `asp-utvt-integradora-dev-mxc-001` para Windows en nivel `Gratis F1`.
-5. **Web App:** Crear `app-utvt-integradora-web-dev-mxc-001` con runtime stack `Node 20 LTS`.
-6. **Integración:** En la sección *Application Insights* de la Web App, habilitar la telemetría seleccionando el componente existente.
-
-### Opción B: Despliegue Automatizado con Azure CLI
-
+### Despliegue de Infraestructura (Lab 2)
 ```powershell
-cd "Lab 1"
-.\deploy-azure-resources.ps1 -Location "mexicocentral"
+cd "Lab 2"
+.\deploy-azure-resources.ps1
 ```
 
-### Opción C: Despliegue con Terraform
+### Rutina FinOps de Ahorro de Créditos (Azure for Students)
+```powershell
+# Detener VM y PostgreSQL al finalizar la sesión de laboratorio:
+.\manage-cost-optimization.ps1 -Action Stop
 
-```bash
-cd "Lab 1"
-terraform init
-terraform plan
-terraform apply -auto-approve
+# Reanudar servicios para pruebas:
+.\manage-cost-optimization.ps1 -Action Start
+
+# Consultar estado:
+.\manage-cost-optimization.ps1 -Action Status
 ```
 
 ---
 
-## 📄 Entregables
+## 📄 Entregables Oficiales
 
-1. **Código fuente:** Repositorio en GitHub [`LudwinGarcia1/azure-laboratories`](https://github.com/LudwinGarcia1/azure-laboratories).
-2. **Reporte de evidencias:** Documento Word [`docs/Reporte_Practica12_Azure_App_Service.docx`](docs/Reporte_Practica12_Azure_App_Service.docx) y respaldo en la carpeta de documentos de Windows.
+1. **Código fuente:** Repositorio en GitHub [`LudwinGarcia1/azure-laboratories`](https://github.com/LudwinGarcia1/azure-laboratories) con historial de commits estructurado bajo estándar *Conventional Commits*.
+2. **Reportes de evidencias:** 
+   - Práctica 12: [`docs/Reporte_Practica12_Azure_App_Service.docx`](docs/Reporte_Practica12_Azure_App_Service.docx)
+   - Práctica 13: [`docs/Reporte_Practica13_Arquitectura_Proyecto_Integrador.docx`](docs/Reporte_Practica13_Arquitectura_Proyecto_Integrador.docx) (con respaldo en `C:\Users\pingu\Documents\`).
